@@ -1,13 +1,26 @@
 package com.example.storeapp.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.storeapp.data.ApiFactory
+import com.example.storeapp.data.Products
+import com.example.storeapp.repository.HomeRepositoryImpl
 
-class HomeViewModel : ViewModel() {
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Response
+import javax.inject.Inject
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: HomeRepositoryImpl,
+    private val apiFactory: ApiFactory
+): ViewModel() {
+
+    val characterList: MutableLiveData<List<Products>> = MutableLiveData()
+
+    fun getData(
+    ) = viewModelScope.launch(Dispatchers.IO){
+        characterList.postValue(repository.getProducts())
     }
-    val text: LiveData<String> = _text
 }
