@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storeapp.databinding.FragmentHomeBinding
+import com.example.storeapp.ui.adapter.HomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
+    lateinit var homeAdapter: HomeAdapter
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -34,7 +37,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initRecycler()
         viewModel.getData()
         observe()
 
@@ -49,12 +52,19 @@ class HomeFragment : Fragment() {
         //})
         lifecycleScope.launchWhenCreated {
             viewModel.characterList.observe(viewLifecycleOwner){
-                //veri geliyor burada adaptere pasla
+                homeAdapter.product = it
             }
         }
 
     }
-
+    //card view deki image view kare olucak altına sepete ekle butonu eklenicek ve favoriler olucak
+    private fun initRecycler(){
+        binding.homeRecycler.apply {
+            homeAdapter = HomeAdapter()
+            this.layoutManager = GridLayoutManager(context,2)
+            adapter = homeAdapter
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
