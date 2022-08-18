@@ -1,4 +1,4 @@
-package com.example.storeapp.data
+package com.example.storeapp.data.entity
 
 data class Products(
     val title:String,

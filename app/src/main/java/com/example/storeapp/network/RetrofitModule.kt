@@ -1,6 +1,6 @@
 package com.example.storeapp.network
 
-import com.example.storeapp.data.ApiFactory
+import com.example.storeapp.data.api.ApiFactory
 import com.example.storeapp.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -13,6 +13,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
+
 
     @Singleton
     @Provides

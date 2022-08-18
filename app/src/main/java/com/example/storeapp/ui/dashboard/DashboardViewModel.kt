@@ -1,16 +1,31 @@
 package com.example.storeapp.ui.dashboard
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.storeapp.data.entity.ProductEntity
+import com.example.storeapp.data.entity.Products
+import com.example.storeapp.repository.StoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(): ViewModel() {
+class DashboardViewModel @Inject constructor(
+    private val dbRepository: StoreRepository,
+): ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    val cartList: MutableLiveData<List<ProductEntity>> = MutableLiveData()
+    fun getAllProductFromRoom(){
+        viewModelScope.launch(Dispatchers.IO) {
+            cartList.postValue(dbRepository.getAllProducts())
+        }
     }
-    val text: LiveData<String> = _text
+
+    fun deleteProduct(productId: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            dbRepository.deleteProduct(productId)
+        }
+    }
 }

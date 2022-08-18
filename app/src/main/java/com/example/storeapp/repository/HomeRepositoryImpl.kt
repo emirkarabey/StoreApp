@@ -1,9 +1,7 @@
 package com.example.storeapp.repository
 
-import com.example.storeapp.data.ApiFactory
-import com.example.storeapp.data.Products
-import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
+import com.example.storeapp.data.api.ApiFactory
+import com.example.storeapp.data.entity.Products
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
