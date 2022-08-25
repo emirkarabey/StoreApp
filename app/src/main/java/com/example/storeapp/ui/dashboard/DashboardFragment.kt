@@ -22,11 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
-    lateinit var cartAdapter: CartAdapter
     private var _binding: FragmentDashboardBinding? = null
     private val viewModel : DashboardViewModel by viewModels()
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -42,37 +39,6 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initRecycler()
-        viewModel.getAllProductFromRoom()
-        observe()
-    }
-
-    private fun initRecycler(){
-        binding.cartRecycler.apply {
-            cartAdapter = CartAdapter(object : CartItemClickListener{
-                override fun onItemClick(productEntity: ProductEntity) {
-                    viewModel.deleteProduct(productEntity.uid)
-                    viewModel.getAllProductFromRoom()
-                    observe()
-                }
-            })
-
-            this.layoutManager = GridLayoutManager(context,2)
-            adapter = cartAdapter
-        }
-    }
-
-    private fun observe(){
-        viewModel.cartList.observe(viewLifecycleOwner){
-            cartAdapter.product = it
-            it.forEach {
-                println(it.price)
-            }
-        }
     }
 
 }

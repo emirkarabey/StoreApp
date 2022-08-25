@@ -12,24 +12,24 @@
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            ></ImageView>
+            android:contentDescription="@string/cart_imageView_contentDescription"
+            />
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="10dp"></TextView>
+            android:layout_margin="10dp"/>
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textStyle="bold"
-            android:layout_margin="10dp"></TextView>
+            android:layout_margin="10dp"/>
         <Button
             android:id="@+id/delete_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="@string/delete_button"
-            ></Button>
+            />
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

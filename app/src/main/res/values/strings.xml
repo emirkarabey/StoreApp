@@ -5,4 +5,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="add_button">Add</string>
     <string name="delete_button">Delete</string>
+
+    //Cart Screen
+    <string name="cart_imageView_contentDescription">Product</string>
+    <string name="home_imageView_contentDescription">Product</string>
+    <string name="home_imageButton_contentDescription">Favorite</string>
 </resources>
