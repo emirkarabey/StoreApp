@@ -5,5 +5,6 @@ data class Products(
     val price:Float,
     val category:String,
     val description:String,
-    val image:String
+    val image:String,
+    var isFav:Boolean?
 )

@@ -13,15 +13,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storeapp.data.entity.ProductEntity
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentDashboardBinding
-import com.example.storeapp.ui.adapter.CartAdapter
-import com.example.storeapp.ui.adapter.CartItemClickListener
-import com.example.storeapp.ui.adapter.HomeAdapter
-import com.example.storeapp.ui.adapter.ItemClickListener
+import com.example.storeapp.ui.adapter.*
 import com.example.storeapp.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
+    lateinit var favAdapter: FavoriteAdapter
     private var _binding: FragmentDashboardBinding? = null
     private val viewModel : DashboardViewModel by viewModels()
     private val binding get() = _binding!!
@@ -34,6 +32,37 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecycler()
+        viewModel.getAllFavoriteFromRoom()
+        observe()
+    }
+
+    private fun initRecycler(){
+        binding.favRecycler.apply {
+            favAdapter = FavoriteAdapter(object : FavoriteItemClickListener {
+                override fun onItemClick(productEntity: ProductEntity) {
+                    viewModel.deleteFavorite(productEntity.uid)
+                    viewModel.getAllFavoriteFromRoom()
+                    observe()
+                }
+            })
+
+            this.layoutManager = GridLayoutManager(context,2)
+            adapter = favAdapter
+        }
+    }
+
+    private fun observe(){
+        viewModel.favList.observe(viewLifecycleOwner){
+            favAdapter.product = it
+            it.forEach {
+                println(it.price)
+            }
+        }
     }
 
     override fun onDestroyView() {

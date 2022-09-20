@@ -49,6 +49,9 @@ class HomeAdapter(private val listener: ItemClickListener) :RecyclerView.Adapter
             binding.addButton.setOnClickListener {
                 listener.onItemClick(product[position])
             }
+            binding.favButton.setOnClickListener {
+                listener.favOnItemClick(product[position])
+            }
         }
     }
 

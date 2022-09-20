@@ -31,13 +31,20 @@ class HomeViewModel @Inject constructor(
     fun addProduct(product: Products){//mapperla kullan
         viewModelScope.launch {
             dbRepository.addProduct(ProductEntity(title = product.title, price = product.price,
-            category = product.category, description = product.description, image = product.image))
+            category = product.category, description = product.description, image = product.image, isFav = product.isFav))
         }
     }
 
     fun getAllProductFromRoom(){
         viewModelScope.launch(Dispatchers.IO) {
             roomList.postValue(dbRepository.getAllProducts())
+        }
+    }
+
+    fun addFavorite(product: Products){
+        viewModelScope.launch {
+            dbRepository.addFavorite(ProductEntity(title = product.title, price = product.price,
+                category = product.category, description = product.description, image = product.image, isFav = product.isFav))
         }
     }
 }

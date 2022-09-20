@@ -12,5 +12,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(): ViewModel() {
+class DashboardViewModel @Inject constructor(
+    private val dbRepository: StoreRepository,
+): ViewModel() {
+    val favList: MutableLiveData<List<ProductEntity>> = MutableLiveData()
+    fun getAllFavoriteFromRoom(){
+        viewModelScope.launch(Dispatchers.IO) {
+            favList.postValue(dbRepository.getAllFavorites())
+        }
+    }
+
+    fun deleteFavorite(productId: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            dbRepository.deleteFavorite(productId)
+        }
+    }
 }

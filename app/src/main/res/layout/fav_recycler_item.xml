@@ -12,7 +12,7 @@
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            android:contentDescription="@string/home_imageView_contentDescription"
+            android:contentDescription="@string/cart_imageView_contentDescription"
             />
         <TextView
             android:id="@+id/tvTitle"
@@ -26,10 +26,10 @@
             android:textStyle="bold"
             android:layout_margin="10dp"/>
         <Button
-            android:id="@+id/add_button"
+            android:id="@+id/delete_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/add_button"
+            android:text="@string/delete_button"
             />
     </LinearLayout>
     <ImageButton
@@ -42,5 +42,4 @@
         android:layout_gravity="right"
         android:contentDescription="@string/home_imageButton_contentDescription"
         />
-
 </androidx.cardview.widget.CardView>

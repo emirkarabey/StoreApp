@@ -11,5 +11,6 @@ data class ProductEntity(
     @ColumnInfo(name = "price") val price: Float?,
     @ColumnInfo(name = "category") val category: String?,
     @ColumnInfo(name = "description") val description: String?,
-    @ColumnInfo(name = "image") val image: String?
+    @ColumnInfo(name = "image") val image: String?,
+    @ColumnInfo(name = "isFav") var isFav: Boolean?
 )
