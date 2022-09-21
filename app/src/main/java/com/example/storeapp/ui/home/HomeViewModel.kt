@@ -4,8 +4,6 @@ import androidx.lifecycle.*
 import com.example.storeapp.data.api.ApiFactory
 import com.example.storeapp.data.entity.ProductEntity
 import com.example.storeapp.data.entity.Products
-import com.example.storeapp.data.local.StoreDao
-import com.example.storeapp.domain.mapper.StoreEntityMapper
 import com.example.storeapp.repository.HomeRepositoryImpl
 import com.example.storeapp.repository.StoreRepository
 

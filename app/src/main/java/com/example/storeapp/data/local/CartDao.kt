@@ -1,13 +1,11 @@
 package com.example.storeapp.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.storeapp.data.entity.ProductEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface StoreDao {
+interface CartDao {
     @Insert
     suspend fun save(product: ProductEntity)
     @Update

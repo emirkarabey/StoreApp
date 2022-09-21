@@ -2,10 +2,8 @@ package com.example.storeapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.storeapp.data.local.AppDatabase
 import com.example.storeapp.data.local.FavoriteDao
 import com.example.storeapp.data.local.FavoriteDatabase
-import com.example.storeapp.data.local.StoreDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -2,11 +2,11 @@ package com.example.storeapp.repository
 
 import com.example.storeapp.data.entity.ProductEntity
 import com.example.storeapp.data.local.FavoriteDao
-import com.example.storeapp.data.local.StoreDao
+import com.example.storeapp.data.local.CartDao
 import javax.inject.Inject
 
 class StoreRepository @Inject constructor(
-    private val dbDao: StoreDao,
+    private val dbDao: CartDao,
     private val dbFavDao: FavoriteDao
 ){
     fun getAllProducts() = dbDao.getAllProducts()

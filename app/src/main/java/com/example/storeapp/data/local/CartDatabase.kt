@@ -8,6 +8,6 @@ import com.example.storeapp.data.entity.ProductEntity
     entities = [ProductEntity::class],
     version = 1
 )
-abstract class AppDatabase: RoomDatabase() {
-    abstract fun storeDao(): StoreDao
+abstract class CartDatabase: RoomDatabase() {
+    abstract fun storeDao(): CartDao
 }

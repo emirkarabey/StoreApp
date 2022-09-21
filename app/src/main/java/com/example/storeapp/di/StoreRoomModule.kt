@@ -2,8 +2,8 @@ package com.example.storeapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.storeapp.data.local.AppDatabase
-import com.example.storeapp.data.local.StoreDao
+import com.example.storeapp.data.local.CartDatabase
+import com.example.storeapp.data.local.CartDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +17,8 @@ object StoreRoomModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase{
-        return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+    fun provideAppDatabase(@ApplicationContext context: Context): CartDatabase{
+        return Room.databaseBuilder(context, CartDatabase::class.java, DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
     }
@@ -26,6 +26,6 @@ object StoreRoomModule {
     @Provides
     @Singleton
     fun provideDao(
-        db:AppDatabase
-    ):StoreDao = db.storeDao()
+        db:CartDatabase
+    ):CartDao = db.storeDao()
 }

@@ -45,16 +45,9 @@ class HomeFragment : Fragment() {
         viewModel.getData()
         observe()
         binding.homeRecycler
-
     }
 
     private fun observe(){
-        //viewModel.characterList.observe(viewLifecycleOwner, Observer {
-        //    it?.let {
-        //        binding.characterRecyclerView.visibility = View.VISIBLE
-        //        countryAdapter.diffList = it.results!!
-        //    }
-        //})
         lifecycleScope.launchWhenCreated {
             viewModel.productList.observe(viewLifecycleOwner){
                 homeAdapter.product = it
