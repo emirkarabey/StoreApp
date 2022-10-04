@@ -27,5 +27,5 @@ object StoreRoomModule {
     @Singleton
     fun provideDao(
         db:CartDatabase
-    ):CartDao = db.storeDao()
+    ):CartDao = db.cartDao()
 }

@@ -9,5 +9,5 @@ import com.example.storeapp.data.entity.ProductEntity
     version = 1
 )
 abstract class CartDatabase: RoomDatabase() {
-    abstract fun storeDao(): CartDao
+    abstract fun cartDao(): CartDao
 }

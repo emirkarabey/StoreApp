@@ -1,6 +1,7 @@
 package com.example.storeapp.repository
 
 import com.example.storeapp.data.entity.ProductEntity
+import com.example.storeapp.data.entity.Products
 import com.example.storeapp.data.local.FavoriteDao
 import com.example.storeapp.data.local.CartDao
 import javax.inject.Inject

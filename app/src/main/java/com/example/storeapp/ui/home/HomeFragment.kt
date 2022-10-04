@@ -1,5 +1,6 @@
 package com.example.storeapp.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.storeapp.R
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentHomeBinding
+import com.example.storeapp.databinding.HomeRecyclerItemBinding
 import com.example.storeapp.ui.adapter.HomeAdapter
 import com.example.storeapp.ui.adapter.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +31,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -44,7 +46,6 @@ class HomeFragment : Fragment() {
         initRecycler()
         viewModel.getData()
         observe()
-        binding.homeRecycler
     }
 
     private fun observe(){
@@ -53,9 +54,7 @@ class HomeFragment : Fragment() {
                 homeAdapter.product = it
             }
         }
-
     }
-    //card view deki image view kare olucak altına sepete ekle butonu eklenicek ve favoriler olucak
     private fun initRecycler(){
         binding.homeRecycler.apply {
             homeAdapter = HomeAdapter(object : ItemClickListener{
@@ -63,10 +62,17 @@ class HomeFragment : Fragment() {
                     addRoom(product)
                     Toast.makeText(requireContext(),"Added to cart",Toast.LENGTH_LONG).show()
                 }
-
+                @SuppressLint("NotifyDataSetChanged")
                 override fun favOnItemClick(product: Products) {
-                    product.isFav=true
-                    addFavorite(product)
+                    if (product.isFav==true){
+                        product.isFav=false
+                        deleteFavorite(product)
+                        homeAdapter.notifyDataSetChanged()
+                    }else{
+                        product.isFav=true
+                        addFavorite(product)
+                        homeAdapter.notifyDataSetChanged()
+                    }
                 }
             })
             this.layoutManager = GridLayoutManager(context,2)
@@ -84,6 +90,10 @@ class HomeFragment : Fragment() {
 
     private fun addFavorite(products: Products){
         viewModel.addFavorite(products)
+    }
+
+    private fun deleteFavorite(products: Products){
+        viewModel.deleteFavorite(products)
     }
 
 }

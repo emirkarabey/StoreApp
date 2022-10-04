@@ -59,9 +59,6 @@ class DashboardFragment : Fragment() {
     private fun observe(){
         viewModel.favList.observe(viewLifecycleOwner){
             favAdapter.product = it
-            it.forEach {
-                println(it.price)
-            }
         }
     }
 
