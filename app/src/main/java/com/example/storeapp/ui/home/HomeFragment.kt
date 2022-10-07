@@ -48,6 +48,16 @@ class HomeFragment : Fragment() {
         observe()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onResume() {
+        viewModel.getData()
+        initRecycler()
+        observe()
+        homeAdapter.notifyDataSetChanged()
+        super.onResume()
+
+    }
+
     private fun observe(){
         lifecycleScope.launchWhenCreated {
             viewModel.productList.observe(viewLifecycleOwner){

@@ -1,27 +1,24 @@
-package com.example.storeapp.ui.notifications
+package com.example.storeapp.ui.cart
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storeapp.data.entity.ProductEntity
-import com.example.storeapp.databinding.FragmentNotificationsBinding
+import com.example.storeapp.databinding.FragmentCartBinding
 import com.example.storeapp.ui.adapter.CartAdapter
 import com.example.storeapp.ui.adapter.CartItemClickListener
-import com.example.storeapp.ui.dashboard.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NotificationsFragment : Fragment() {
+class CartFragment : Fragment() {
 
     lateinit var cartAdapter: CartAdapter
-    private var _binding: FragmentNotificationsBinding? = null
-    private val viewModel : NotificationsViewModel by viewModels()
+    private var _binding: FragmentCartBinding? = null
+    private val viewModel : CartViewModel by viewModels()
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -31,7 +28,7 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
     }

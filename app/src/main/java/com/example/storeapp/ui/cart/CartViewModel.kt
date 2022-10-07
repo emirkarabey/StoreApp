@@ -1,6 +1,5 @@
-package com.example.storeapp.ui.notifications
+package com.example.storeapp.ui.cart
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationsViewModel @Inject constructor(
+class CartViewModel @Inject constructor(
     private val dbRepository: StoreRepository,
 ): ViewModel() {
 

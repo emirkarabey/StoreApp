@@ -50,6 +50,8 @@ class FavoriteAdapter(private val listener: FavoriteItemClickListener) : Recycle
                     .into(binding.ivImage)
                 if(product[position].isFav==true){
                     binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                }else{
+                    binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
                 }
             }
             binding.favButton.setOnClickListener {

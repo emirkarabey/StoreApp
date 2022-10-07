@@ -47,16 +47,14 @@ class HomeAdapter(private val listener: ItemClickListener) :RecyclerView.Adapter
                     .into(binding.ivImage)
                 if(product[position].isFav==true){
                     binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                }else{
+                    binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
                 }
             }
             binding.addButton.setOnClickListener {
                 listener.onItemClick(product[position])
             }
-            if (product[position].isFav == true){
-                binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-            }else{
-                binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-            }
+
             binding.favButton.setOnClickListener {
                 listener.favOnItemClick(product[position])
             }

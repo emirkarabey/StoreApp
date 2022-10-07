@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">StoreApp</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Favorites</string>
+    <string name="title_notifications">Cart</string>
     <string name="add_button">Add</string>
     <string name="delete_button">Delete</string>
 
