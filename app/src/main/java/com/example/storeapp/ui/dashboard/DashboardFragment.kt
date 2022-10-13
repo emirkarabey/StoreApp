@@ -49,6 +49,7 @@ class DashboardFragment : Fragment() {
                 override fun onItemClick(productEntity: ProductEntity) {
                     viewModel.deleteFavorite(productEntity.uid)
                     viewModel.getAllFavoriteFromRoom()
+                    observe()
                     favAdapter.notifyDataSetChanged()
                 }
             })
