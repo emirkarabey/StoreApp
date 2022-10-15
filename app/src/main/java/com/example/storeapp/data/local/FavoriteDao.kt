@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.storeapp.data.entity.ProductEntity
-import com.example.storeapp.data.entity.Products
 
 @Dao
 interface FavoriteDao {

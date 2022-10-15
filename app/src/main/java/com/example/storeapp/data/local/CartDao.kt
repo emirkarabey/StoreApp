@@ -2,7 +2,6 @@ package com.example.storeapp.data.local
 
 import androidx.room.*
 import com.example.storeapp.data.entity.ProductEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {

@@ -20,8 +20,6 @@ class CartFragment : Fragment() {
     lateinit var cartAdapter: CartAdapter
     private var _binding: FragmentCartBinding? = null
     private val viewModel : CartViewModel by viewModels()
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

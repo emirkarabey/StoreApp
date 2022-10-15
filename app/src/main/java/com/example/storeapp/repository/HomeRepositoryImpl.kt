@@ -1,7 +1,6 @@
 package com.example.storeapp.repository
 
 import com.example.storeapp.data.api.ApiFactory
-import com.example.storeapp.data.entity.ProductEntity
 import com.example.storeapp.data.entity.Products
 import javax.inject.Inject
 
