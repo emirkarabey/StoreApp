@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="250dp"
     android:layout_margin="10dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,12 +25,6 @@
             android:layout_height="30dp"
             android:textStyle="bold"
             android:layout_margin="10dp"/>
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/delete_button"
-            />
     </LinearLayout>
     <ImageButton
         android:id="@+id/fav_button"

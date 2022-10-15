@@ -20,11 +20,11 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
 
     val productList: MutableLiveData<List<Products>> = MutableLiveData()
-    var roomList: MutableList<Products> = mutableListOf()
+    var roomList: MutableLiveData<List<Products>> = MutableLiveData()
     fun getData(
     ) = viewModelScope.launch(Dispatchers.IO){
-        roomList.addAll(repository.getProducts())
-        isFav(roomList,dbRepository.getAllFavorites())
+        roomList.postValue(repository.getProducts())
+        roomList.value?.let { isFav(it,dbRepository.getAllFavorites()) }
     }
 
     fun addProduct(product: Products){//mapperla kullan

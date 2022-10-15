@@ -48,12 +48,10 @@ class HomeFragment : Fragment() {
         observe()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
-        viewModel.getData()
         initRecycler()
+        viewModel.getData()
         observe()
-        homeAdapter.notifyDataSetChanged()
         super.onResume()
 
     }
