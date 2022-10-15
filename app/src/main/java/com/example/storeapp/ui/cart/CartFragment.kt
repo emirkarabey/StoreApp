@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.storeapp.data.entity.ProductEntityMapper
+import com.example.storeapp.domain.mapper.ProductEntityMapper
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentCartBinding
 import com.example.storeapp.ui.adapter.CartAdapter

@@ -1,8 +1,9 @@
-package com.example.storeapp.data.entity
+package com.example.storeapp.domain.mapper
 
-import com.example.storeapp.utils.EntityMapper
+import com.example.storeapp.data.entity.ProductEntity
+import com.example.storeapp.data.entity.Products
 
-class ProductEntityMapper :EntityMapper<ProductEntity, Products>{
+class ProductEntityMapper : EntityMapper<ProductEntity, Products> {
     override fun mapFromEntity(entity: ProductEntity): Products {
         return  Products(
             id = entity.uid, title = entity.title,
