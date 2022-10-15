@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storeapp.data.entity.ProductEntity
+import com.example.storeapp.data.entity.ProductEntityMapper
+import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentDashboardBinding
 import com.example.storeapp.ui.adapter.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +21,7 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val viewModel : DashboardViewModel by viewModels()
     private val binding get() = _binding!!
-
+    val mapper = ProductEntityMapper()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,8 +43,8 @@ class DashboardFragment : Fragment() {
         binding.favRecycler.apply {
             favAdapter = FavoriteAdapter(object : FavoriteItemClickListener {
                 @SuppressLint("NotifyDataSetChanged")
-                override fun onItemClick(productEntity: ProductEntity) {
-                    viewModel.deleteFavorite(productEntity.uid)
+                override fun onItemClick(products: Products) {
+                    viewModel.deleteFavorite(products.id)
                     viewModel.getAllFavoriteFromRoom()
                     observe()
                     favAdapter.notifyDataSetChanged()
@@ -56,7 +58,8 @@ class DashboardFragment : Fragment() {
 
     private fun observe(){
         viewModel.favList.observe(viewLifecycleOwner){
-            favAdapter.product = it
+            val productList: List<Products> = mapper.fromEntityList(it)
+            favAdapter.product = productList
         }
     }
 
