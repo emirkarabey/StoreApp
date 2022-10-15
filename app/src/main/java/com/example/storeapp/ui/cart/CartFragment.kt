@@ -1,5 +1,6 @@
 package com.example.storeapp.ui.cart
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,10 +49,12 @@ class CartFragment : Fragment() {
     private fun initRecycler(){
         binding.cartRecycler.apply {
             cartAdapter = CartAdapter(object : CartItemClickListener {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClick(productEntity: ProductEntity) {
                     viewModel.deleteProduct(productEntity.uid)
                     viewModel.getAllProductFromRoom()
                     observe()
+                    cartAdapter.notifyDataSetChanged()
                 }
             })
 
@@ -63,9 +66,6 @@ class CartFragment : Fragment() {
     private fun observe(){
         viewModel.cartList.observe(viewLifecycleOwner){
             cartAdapter.product = it
-            it.forEach {
-                println(it.price)
-            }
         }
     }
 }

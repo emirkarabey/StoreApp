@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.storeapp.data.entity.ProductEntity
-import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.CartRecyclerItemBinding
 
 class CartAdapter(private val listener: CartItemClickListener) : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
@@ -49,6 +48,7 @@ class CartAdapter(private val listener: CartItemClickListener) : RecyclerView.Ad
 
             binding.deleteButton.setOnClickListener {
                 listener.onItemClick(product[position])
+                println(product[position].title)
             }
         }
     }
