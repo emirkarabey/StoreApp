@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.storeapp.data.entity.ProductEntity
+import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.CartRecyclerItemBinding
 
 class CartAdapter(private val listener: CartItemClickListener) : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
@@ -15,19 +16,19 @@ class CartAdapter(private val listener: CartItemClickListener) : RecyclerView.Ad
 
     }
 
-    object CartDiffCallback: DiffUtil.ItemCallback<ProductEntity>(){
-        override fun areItemsTheSame(oldItem: ProductEntity, newItem: ProductEntity): Boolean {
+    object CartDiffCallback: DiffUtil.ItemCallback<Products>(){
+        override fun areItemsTheSame(oldItem: Products, newItem: Products): Boolean {
             return oldItem.title == newItem.title
         }
 
-        override fun areContentsTheSame(oldItem: ProductEntity, newItem: ProductEntity): Boolean {
+        override fun areContentsTheSame(oldItem: Products, newItem: Products): Boolean {
             return oldItem == newItem
         }
 
     }
 
     private val diffList = AsyncListDiffer(this,CartDiffCallback)
-    var product: List<ProductEntity>
+    var product: List<Products>
         get()=diffList.currentList
         set(value)=diffList.submitList(value)
 

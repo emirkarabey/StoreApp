@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.storeapp.data.entity.ProductEntity
+import com.example.storeapp.data.entity.ProductEntityMapper
+import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentCartBinding
 import com.example.storeapp.ui.adapter.CartAdapter
 import com.example.storeapp.ui.adapter.CartItemClickListener
@@ -21,7 +22,7 @@ class CartFragment : Fragment() {
     private var _binding: FragmentCartBinding? = null
     private val viewModel : CartViewModel by viewModels()
     private val binding get() = _binding!!
-
+    val mapper = ProductEntityMapper()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,8 +49,8 @@ class CartFragment : Fragment() {
         binding.cartRecycler.apply {
             cartAdapter = CartAdapter(object : CartItemClickListener {
                 @SuppressLint("NotifyDataSetChanged")
-                override fun onItemClick(productEntity: ProductEntity) {
-                    viewModel.deleteProduct(productEntity.uid)
+                override fun onItemClick(product: Products) {
+                    viewModel.deleteProduct(product.id)
                     viewModel.getAllProductFromRoom()
                     observe()
                     cartAdapter.notifyDataSetChanged()
@@ -63,7 +64,8 @@ class CartFragment : Fragment() {
 
     private fun observe(){
         viewModel.cartList.observe(viewLifecycleOwner){
-            cartAdapter.product = it
+            val productList: List<Products> = mapper.fromEntityList(it)
+            cartAdapter.product = productList
         }
     }
 }
