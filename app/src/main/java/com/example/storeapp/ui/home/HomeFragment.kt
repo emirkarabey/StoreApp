@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -113,7 +110,8 @@ class HomeFragment : BottomSheetDialogFragment() {
         viewModel.deleteFavorite(products)
     }
 
-    @SuppressLint("SetTextI18n")
+
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     private fun showDialog(product: Products){
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(R.layout.home_bottom_sheet_dialog)
@@ -123,6 +121,8 @@ class HomeFragment : BottomSheetDialogFragment() {
         val tvPrice: TextView? = dialog.findViewById<TextView>(R.id.tv_price)
         val tvCategory: TextView? = dialog.findViewById<TextView>(R.id.tvCategory)
         val tvDescription: TextView? = dialog.findViewById<TextView>(R.id.tvDescription)
+        val addButton: Button? = dialog.findViewById<Button>(R.id.add_button)
+        val favButton: ImageButton? = dialog.findViewById<ImageButton>(R.id.fav_button)
 
         if (ivImage != null) {
             Glide.with(ivImage)
@@ -134,13 +134,37 @@ class HomeFragment : BottomSheetDialogFragment() {
             tvTitle.text = "Title: " + product.title.toString()
         }
         if (tvPrice != null) {
-            tvPrice.text = "Price: "+product.price.toString()+" $"
+            tvPrice.text = "Price: $"+product.price.toString()
         }
         if (tvCategory != null) {
             tvCategory.text = "Category: "+product.category.toString()
         }
         if (tvDescription != null) {
             tvDescription.text = "Description: "+product.description.toString()
+        }
+
+        if (product.isFav==true){
+            favButton?.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+        }else{
+            favButton?.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+        }
+
+        favButton?.setOnClickListener {
+            if (product.isFav==true){
+                product.isFav=false
+                deleteFavorite(product)
+                homeAdapter.notifyDataSetChanged()
+                favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+            }else{
+                product.isFav=true
+                addFavorite(product)
+                homeAdapter.notifyDataSetChanged()
+                favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+            }
+        }
+        addButton?.setOnClickListener {
+            addRoom(product)
+            Toast.makeText(requireContext(),"Added to cart",Toast.LENGTH_LONG).show()
         }
         btnEdit?.setOnClickListener {
             Toast.makeText(requireContext(), "Clicked on Edit", Toast.LENGTH_SHORT).show()

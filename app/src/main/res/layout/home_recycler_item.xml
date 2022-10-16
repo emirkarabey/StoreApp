@@ -31,7 +31,7 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:icon="@drawable/ic_baseline_shopping_cart_24"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/purple_500"
             android:text="@string/add_button"
