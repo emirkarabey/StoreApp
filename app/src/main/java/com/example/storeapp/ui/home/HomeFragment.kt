@@ -78,7 +78,7 @@ class HomeFragment : BottomSheetDialogFragment() {
                     initRecycler()
                     viewModel.getData()
                     observe()
-                    println(category)
+
                 }
 
             })

@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.storeapp.data.entity.Categories
 import com.example.storeapp.data.entity.ProductEntity
 import com.example.storeapp.data.entity.Products
+import com.example.storeapp.domain.mapper.ProductEntityMapper
 import com.example.storeapp.repository.HomeRepositoryImpl
 import com.example.storeapp.repository.StoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,6 +21,7 @@ class HomeViewModel @Inject constructor(
     val productList: MutableLiveData<List<Products>> = MutableLiveData()
     var roomList: MutableLiveData<List<Products>> = MutableLiveData()
     var filteredProductList: MutableList<Products> = mutableListOf()
+    val mapper = ProductEntityMapper()
     fun getData(
     ) = viewModelScope.launch(Dispatchers.IO){
         categoryList.postValue(repository.getCategories())
@@ -29,15 +31,15 @@ class HomeViewModel @Inject constructor(
 
     fun addProduct(product: Products){//mapperla kullan
         viewModelScope.launch {
-            dbRepository.addProduct(ProductEntity(title = product.title, price = product.price,
-            category = product.category, description = product.description, image = product.image, isFav = product.isFav))
+            val productEntity: ProductEntity = mapper.mapToEntity(product)
+            dbRepository.addProduct(productEntity)
         }
     }
 
     fun addFavorite(product: Products){
         viewModelScope.launch {
-            dbRepository.addFavorite(ProductEntity(title = product.title, price = product.price,
-                category = product.category, description = product.description, image = product.image, isFav = product.isFav))
+            val productEntity: ProductEntity = mapper.mapToEntity(product)
+            dbRepository.addFavorite(productEntity)
         }
     }
 
