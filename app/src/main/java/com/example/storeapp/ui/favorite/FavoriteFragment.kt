@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storeapp.domain.mapper.ProductEntityMapper
 import com.example.storeapp.data.entity.Products
@@ -56,10 +57,26 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun observe(){
-        viewModel.favList.observe(viewLifecycleOwner){
-            val productList: List<Products> = mapper.fromEntityList(it)
-            favAdapter.product = productList
+        lifecycleScope.launchWhenCreated {
+            viewModel.favList.observe(viewLifecycleOwner){
+                viewModel.progressBar.postValue(true)
+                val productList: List<Products> = mapper.fromEntityList(it)
+                favAdapter.product = productList
+                viewModel.progressBar.postValue(false)
+
+            }
+
+            viewModel.progressBar.observe(viewLifecycleOwner){
+                if (it){
+                    binding.favRecycler.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                }else{
+                    binding.favRecycler.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
         }
+
     }
 
     override fun onDestroyView() {

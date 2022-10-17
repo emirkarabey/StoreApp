@@ -12,11 +12,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    private val dbRepository: StoreRepository,
+    private val dbRepository: StoreRepository
 ): ViewModel() {
     val favList: MutableLiveData<List<ProductEntity>> = MutableLiveData()
+    val progressBar = MutableLiveData<Boolean>()
+
     fun getAllFavoriteFromRoom(){
         viewModelScope.launch(Dispatchers.IO) {
+            progressBar.postValue(true)
             favList.postValue(dbRepository.getAllFavorites())
         }
     }
