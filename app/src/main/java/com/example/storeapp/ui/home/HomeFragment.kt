@@ -152,7 +152,15 @@ class HomeFragment : BottomSheetDialogFragment() {
         val tvDescription: TextView? = dialog.findViewById<TextView>(R.id.tv_description)
         val addButton: Button? = dialog.findViewById<Button>(R.id.add_button)
         val favButton: ImageButton? = dialog.findViewById<ImageButton>(R.id.fav_button)
+        val rBar: RatingBar? = dialog.findViewById<RatingBar>(R.id.rBar)
+        val tvBar: TextView? = dialog.findViewById<TextView>(R.id.tv_rate)
 
+        if (rBar != null) {
+            rBar.rating = product.rating!!.rate
+        }
+        if (tvBar != null) {
+            tvBar.text = product.rating!!.rate.toString()
+        }
         if (ivImage != null) {
             Glide.with(ivImage)
                 .load(product.image)
