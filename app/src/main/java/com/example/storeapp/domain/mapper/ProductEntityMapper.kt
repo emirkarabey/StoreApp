@@ -8,7 +8,7 @@ class ProductEntityMapper : EntityMapper<ProductEntity, Products> {
         return  Products(
             id = entity.uid, title = entity.title,
             price = entity.price, category = entity.category,
-            description = entity.description, image = entity.image, isFav = entity.isFav
+            description = entity.description, image = entity.image, isFav = entity.isFav, rating = null
         )
     }
 

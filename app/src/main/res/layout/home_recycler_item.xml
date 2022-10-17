@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="320dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp">
     <LinearLayout
@@ -26,6 +26,25 @@
             android:layout_height="30dp"
             android:textStyle="bold"
             android:layout_margin="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RatingBar
+                android:id="@+id/rBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="0.5"
+                android:theme="@style/Widget.AppCompat.RatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:numStars="5"
+                />
+            <TextView
+                android:id="@+id/tv_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_button"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"

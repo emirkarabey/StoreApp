@@ -49,6 +49,8 @@ class HomeAdapter(private val listener: ItemClickListener) :RecyclerView.Adapter
                 }else{
                     binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
                 }
+                binding.rBar.rating = product[position].rating?.rate!!.toFloat()
+                binding.tvRate.text = product[position].rating?.rate.toString()
             }
             binding.addButton.setOnClickListener {
                 listener.onItemClick(product[position])

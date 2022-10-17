@@ -7,5 +7,6 @@ data class Products(
     val category:String?,
     val description:String?,
     val image:String?,
-    var isFav:Boolean?
+    var isFav:Boolean?,
+    val rating: Rating?
 )
