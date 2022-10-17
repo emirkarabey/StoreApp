@@ -63,7 +63,23 @@ class HomeFragment : BottomSheetDialogFragment() {
     private fun observe(){
         lifecycleScope.launchWhenCreated {
             viewModel.productList.observe(viewLifecycleOwner){
+                binding.progressBar.visibility = View.VISIBLE
                 homeAdapter.product = it
+                binding.progressBar.visibility = View.GONE
+            }
+
+            viewModel.progressBar.observe(viewLifecycleOwner){
+                if (it){
+                    binding.homeRecycler.visibility = View.GONE
+                    binding.categoryRecycler.visibility = View.GONE
+                    binding.tvCategory.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                }else{
+                    binding.homeRecycler.visibility = View.VISIBLE
+                    binding.categoryRecycler.visibility = View.VISIBLE
+                    binding.tvCategory.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                }
             }
         }
     }
@@ -77,7 +93,6 @@ class HomeFragment : BottomSheetDialogFragment() {
                     initRecycler()
                     viewModel.getData()
                     observe()
-
                 }
 
             })
