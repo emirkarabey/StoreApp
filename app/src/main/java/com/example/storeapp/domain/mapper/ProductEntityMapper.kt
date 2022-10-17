@@ -14,7 +14,7 @@ class ProductEntityMapper : EntityMapper<ProductEntity, Products> {
 
     override fun mapToEntity(domainModel: Products): ProductEntity {
         return ProductEntity(
-             title = domainModel.title,
+            title = domainModel.title,
             price = domainModel.price, category = domainModel.category,
             description = domainModel.description, image = domainModel.image, isFav = domainModel.isFav
         )

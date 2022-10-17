@@ -1,4 +1,4 @@
-package com.example.storeapp.ui.dashboard
+package com.example.storeapp.ui.favorite
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,15 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storeapp.domain.mapper.ProductEntityMapper
 import com.example.storeapp.data.entity.Products
-import com.example.storeapp.databinding.FragmentDashboardBinding
+import com.example.storeapp.databinding.FragmentFavoriteBinding
 import com.example.storeapp.ui.adapter.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashboardFragment : Fragment() {
+class FavoriteFragment : Fragment() {
     lateinit var favAdapter: FavoriteAdapter
-    private var _binding: FragmentDashboardBinding? = null
-    private val viewModel : DashboardViewModel by viewModels()
+    private var _binding: FragmentFavoriteBinding? = null
+    private val viewModel : FavoriteViewModel by viewModels()
     private val binding get() = _binding!!
     val mapper = ProductEntityMapper()
     override fun onCreateView(
@@ -26,7 +26,7 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
     }

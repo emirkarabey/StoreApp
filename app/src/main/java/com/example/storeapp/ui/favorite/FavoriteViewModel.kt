@@ -1,4 +1,4 @@
-package com.example.storeapp.ui.dashboard
+package com.example.storeapp.ui.favorite
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
+class FavoriteViewModel @Inject constructor(
     private val dbRepository: StoreRepository,
 ): ViewModel() {
     val favList: MutableLiveData<List<ProductEntity>> = MutableLiveData()
