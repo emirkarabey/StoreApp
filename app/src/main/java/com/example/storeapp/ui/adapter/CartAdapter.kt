@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.storeapp.data.entity.ProductEntity
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.CartRecyclerItemBinding
 
@@ -42,9 +41,9 @@ class CartAdapter(private val listener: CartItemClickListener) : RecyclerView.Ad
             with(product){
                 binding.tvTitle.text = product[position].title
                 binding.tvPrice.text = product[position].price.toString()
-                Glide.with(binding.ivImage)
+                Glide.with(binding.ivCart)
                     .load(product[position].image)
-                    .into(binding.ivImage)
+                    .into(binding.ivCart)
             }
 
             binding.deleteButton.setOnClickListener {

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -82,9 +81,11 @@ class HomeFragment : BottomSheetDialogFragment() {
                 }
 
             })
-            viewModel.categoryList.observe(viewLifecycleOwner, Observer {
-                categoryAdapter.setList(it)
-            })
+            lifecycleScope.launchWhenCreated {
+                viewModel.categoryList.observe(viewLifecycleOwner){
+                    categoryAdapter.setList(it)
+                }
+            }
             this.layoutManager = GridLayoutManager(context,4)
             adapter = categoryAdapter
         }
@@ -144,11 +145,11 @@ class HomeFragment : BottomSheetDialogFragment() {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(R.layout.home_bottom_sheet_dialog)
         val btnEdit= dialog.findViewById<RelativeLayout>(R.id.rl_edit)
-        val tvTitle: TextView? = dialog.findViewById<TextView>(R.id.tvTitle)
-        val ivImage: ImageView? = dialog.findViewById<ImageView>(R.id.ivImage)
+        val tvTitle: TextView? = dialog.findViewById<TextView>(R.id.tv_title)
+        val ivImage: ImageView? = dialog.findViewById<ImageView>(R.id.iv_dialog)
         val tvPrice: TextView? = dialog.findViewById<TextView>(R.id.tv_price)
-        val tvCategory: TextView? = dialog.findViewById<TextView>(R.id.tvCategory)
-        val tvDescription: TextView? = dialog.findViewById<TextView>(R.id.tvDescription)
+        val tvCategory: TextView? = dialog.findViewById<TextView>(R.id.tv_category)
+        val tvDescription: TextView? = dialog.findViewById<TextView>(R.id.tv_description)
         val addButton: Button? = dialog.findViewById<Button>(R.id.add_button)
         val favButton: ImageButton? = dialog.findViewById<ImageButton>(R.id.fav_button)
 

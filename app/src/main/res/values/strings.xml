@@ -12,4 +12,6 @@
     <string name="home_imageButton_contentDescription">Favorite</string>
     //Home Screen
     <string name="title_categories">Categories</string>
+    //Home Bottom Sheet Dialog
+    <string name="home_bottomSheet_imageView_contentDescription">Product</string>
 </resources>

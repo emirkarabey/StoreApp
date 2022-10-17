@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.favorite.FavoriteFragment">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fav_recycler"
         android:layout_width="match_parent"
