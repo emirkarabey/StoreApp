@@ -6,16 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.cardview.widget.CardView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.storeapp.R
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentHomeBinding
+import com.example.storeapp.ui.adapter.CategoryItemClickListener
 import com.example.storeapp.ui.adapter.HomeAdapter
+import com.example.storeapp.ui.adapter.HomeCategoryAdapter
 import com.example.storeapp.ui.adapter.ItemClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -25,11 +26,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BottomSheetDialogFragment() {
 
     lateinit var homeAdapter: HomeAdapter
+    lateinit var categoryAdapter: HomeCategoryAdapter
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var categoryList: ArrayList<String>
     private val viewModel : HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        categoryList = arrayListOf<String>()
         super.onCreate(savedInstanceState)
     }
 
@@ -50,6 +54,7 @@ class HomeFragment : BottomSheetDialogFragment() {
 
     override fun onResume() {
         initRecycler()
+        initCategoryRecycler()
         viewModel.getData()
         observe()
         super.onResume()
@@ -63,6 +68,29 @@ class HomeFragment : BottomSheetDialogFragment() {
             }
         }
     }
+
+
+    private fun initCategoryRecycler(){
+        binding.categoryRecycler.apply {
+            categoryAdapter = HomeCategoryAdapter(categoryList,object : CategoryItemClickListener{
+                override fun onItemClick(category: String) {
+                    viewModel.getCategoryProduct(category)
+                    initRecycler()
+                    viewModel.getData()
+                    observe()
+                    println(category)
+                }
+
+            })
+            viewModel.categoryList.observe(viewLifecycleOwner, Observer {
+                categoryAdapter.setList(it)
+            })
+            this.layoutManager = GridLayoutManager(context,4)
+            adapter = categoryAdapter
+        }
+    }
+
+
     private fun initRecycler(){
         binding.homeRecycler.apply {
             homeAdapter = HomeAdapter(object : ItemClickListener{
@@ -112,7 +140,7 @@ class HomeFragment : BottomSheetDialogFragment() {
 
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
-    private fun showDialog(product: Products){
+    private fun showDialog(product: Products)=binding.apply{
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(R.layout.home_bottom_sheet_dialog)
         val btnEdit= dialog.findViewById<RelativeLayout>(R.id.rl_edit)
@@ -133,12 +161,15 @@ class HomeFragment : BottomSheetDialogFragment() {
         if (tvTitle != null) {
             tvTitle.text = "Title: " + product.title.toString()
         }
+
         if (tvPrice != null) {
             tvPrice.text = "Price: $"+product.price.toString()
         }
+
         if (tvCategory != null) {
             tvCategory.text = "Category: "+product.category.toString()
         }
+
         if (tvDescription != null) {
             tvDescription.text = "Description: "+product.description.toString()
         }

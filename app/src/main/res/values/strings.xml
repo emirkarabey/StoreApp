@@ -10,4 +10,6 @@
     <string name="cart_imageView_contentDescription">Product</string>
     <string name="home_imageView_contentDescription">Product</string>
     <string name="home_imageButton_contentDescription">Favorite</string>
+    //Home Screen
+    <string name="title_categories">Categories</string>
 </resources>
