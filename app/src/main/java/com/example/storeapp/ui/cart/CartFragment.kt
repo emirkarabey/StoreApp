@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storeapp.domain.mapper.ProductEntityMapper
 import com.example.storeapp.data.entity.Products
@@ -20,7 +21,7 @@ class CartFragment : Fragment() {
 
     lateinit var cartAdapter: CartAdapter
     private var _binding: FragmentCartBinding? = null
-    private val viewModel : CartViewModel by viewModels()
+    private val viewModel: CartViewModel by viewModels()
     private val binding get() = _binding!!
     val mapper = ProductEntityMapper()
     override fun onCreateView(
@@ -45,7 +46,7 @@ class CartFragment : Fragment() {
         observe()
     }
 
-    private fun initRecycler(){
+    private fun initRecycler() {
         binding.cartRecycler.apply {
             cartAdapter = CartAdapter(object : CartItemClickListener {
                 @SuppressLint("NotifyDataSetChanged")
@@ -57,15 +58,30 @@ class CartFragment : Fragment() {
                 }
             })
 
-            this.layoutManager = GridLayoutManager(context,2)
+            this.layoutManager = GridLayoutManager(context, 2)
             adapter = cartAdapter
         }
     }
 
-    private fun observe(){
-        viewModel.cartList.observe(viewLifecycleOwner){
-            val productList: List<Products> = mapper.fromEntityList(it)
-            cartAdapter.product = productList
+    private fun observe() {
+        lifecycleScope.launchWhenCreated {
+
+            viewModel.cartList.observe(viewLifecycleOwner) {
+                viewModel.progressBar.postValue(true)
+                val productList: List<Products> = mapper.fromEntityList(it)
+                cartAdapter.product = productList
+                viewModel.progressBar.postValue(false)
+            }
+
+            viewModel.progressBar.observe(viewLifecycleOwner){
+                if (it){
+                    binding.cartRecycler.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                }else{
+                    binding.cartRecycler.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
         }
     }
 }

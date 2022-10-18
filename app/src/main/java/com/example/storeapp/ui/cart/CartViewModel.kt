@@ -14,10 +14,12 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private val dbRepository: StoreRepository,
 ): ViewModel() {
-
     val cartList: MutableLiveData<List<ProductEntity>> = MutableLiveData()
+    val progressBar = MutableLiveData<Boolean>()
+
     fun getAllProductFromRoom(){
         viewModelScope.launch(Dispatchers.IO) {
+            progressBar.postValue(true)
             cartList.postValue(dbRepository.getAllProducts())
         }
     }
