@@ -47,18 +47,22 @@ class HomeFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-        viewModel.getData()
-        observe()
-    }
-
-    override fun onResume() {
-        initRecycler()
         initCategoryRecycler()
         viewModel.getData()
         observe()
-        super.onResume()
-
+        with(binding){
+            swipeRefreshLayout.setOnRefreshListener {
+                progressBar.visibility = View.VISIBLE
+                homeRecycler.visibility = View.GONE
+                categoryRecycler.visibility = View.GONE
+                initRecycler()
+                viewModel.getData()
+                observe()
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
     }
+//on view create a çok giriyor sürekli internetten veri çekiyor bunu çöz
 
     private fun observe(){
         lifecycleScope.launchWhenCreated {
@@ -89,9 +93,9 @@ class HomeFragment : BottomSheetDialogFragment() {
         binding.categoryRecycler.apply {
             categoryAdapter = HomeCategoryAdapter(categoryList,object : CategoryItemClickListener{
                 override fun onItemClick(category: String) {
+                    viewModel.getData()
                     viewModel.getCategoryProduct(category)
                     initRecycler()
-                    viewModel.getData()
                     observe()
                 }
 
