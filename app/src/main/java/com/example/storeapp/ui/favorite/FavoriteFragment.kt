@@ -34,12 +34,12 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
+        setupRecycler()
         viewModel.getAllFavoriteFromRoom()
         observe()
     }
 
-    private fun initRecycler(){
+    private fun setupRecycler(){
         binding.favRecycler.apply {
             favAdapter = FavoriteAdapter(object : FavoriteItemClickListener {
                 @SuppressLint("NotifyDataSetChanged")
@@ -63,7 +63,6 @@ class FavoriteFragment : Fragment() {
                 val productList: List<Products> = mapper.fromEntityList(it)
                 favAdapter.product = productList
                 viewModel.progressBar.postValue(false)
-
             }
 
             viewModel.progressBar.observe(viewLifecycleOwner){
@@ -76,7 +75,6 @@ class FavoriteFragment : Fragment() {
                 }
             }
         }
-
     }
 
     override fun onDestroyView() {

@@ -14,4 +14,5 @@
     <string name="title_categories">Categories</string>
     //Home Bottom Sheet Dialog
     <string name="home_bottomSheet_imageView_contentDescription">Product</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

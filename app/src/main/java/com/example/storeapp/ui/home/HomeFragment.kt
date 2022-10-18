@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
-import com.example.storeapp.R
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentHomeBinding
 import com.example.storeapp.ui.adapter.CategoryItemClickListener
 import com.example.storeapp.ui.adapter.HomeAdapter
 import com.example.storeapp.ui.adapter.HomeCategoryAdapter
 import com.example.storeapp.ui.adapter.ItemClickListener
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,8 +44,8 @@ class HomeFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
-        initCategoryRecycler()
+        setupHomeRecycler()
+        setupCategoryRecycler()
         viewModel.getData()
         observe()
         with(binding){
@@ -55,7 +53,7 @@ class HomeFragment : BottomSheetDialogFragment() {
                 progressBar.visibility = View.VISIBLE
                 homeRecycler.visibility = View.GONE
                 categoryRecycler.visibility = View.GONE
-                initRecycler()
+                setupHomeRecycler()
                 viewModel.getData()
                 observe()
                 swipeRefreshLayout.isRefreshing = false
@@ -89,13 +87,13 @@ class HomeFragment : BottomSheetDialogFragment() {
     }
 
 
-    private fun initCategoryRecycler(){
+    private fun setupCategoryRecycler(){
         binding.categoryRecycler.apply {
             categoryAdapter = HomeCategoryAdapter(categoryList,object : CategoryItemClickListener{
                 override fun onItemClick(category: String) {
                     viewModel.getData()
                     viewModel.getCategoryProduct(category)
-                    initRecycler()
+                    setupHomeRecycler()
                     observe()
                 }
 
@@ -111,12 +109,12 @@ class HomeFragment : BottomSheetDialogFragment() {
     }
 
 
-    private fun initRecycler(){
+    private fun setupHomeRecycler(){
         binding.homeRecycler.apply {
             homeAdapter = HomeAdapter(object : ItemClickListener{
 
                 override fun onItemClick(product: Products) {
-                    addRoom(product)
+                    addCart(product)
                     Toast.makeText(requireContext(),"Added to cart",Toast.LENGTH_LONG).show()
                 }
 
@@ -134,7 +132,9 @@ class HomeFragment : BottomSheetDialogFragment() {
                 }
 
                 override fun onFragmentItemClick(product: Products) {
-                    showDialog(product = product)
+
+                    val action = HomeFragmentDirections.actionNavigationHomeToBottomSheetFragment(product)
+                    findNavController().navigate(action)
                 }
             })
             this.layoutManager = GridLayoutManager(context,2)
@@ -146,8 +146,8 @@ class HomeFragment : BottomSheetDialogFragment() {
         _binding = null
     }
 
-    private fun addRoom(products: Products){
-        viewModel.addProduct(products)
+    private fun addCart(products: Products){
+        viewModel.addCart(products)
     }
 
     private fun addFavorite(products: Products){
@@ -156,79 +156,5 @@ class HomeFragment : BottomSheetDialogFragment() {
 
     private fun deleteFavorite(products: Products){
         viewModel.deleteFavorite(products)
-    }
-
-
-    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
-    private fun showDialog(product: Products)=binding.apply{
-        val dialog = BottomSheetDialog(requireContext())
-        dialog.setContentView(R.layout.home_bottom_sheet_dialog)
-        val btnEdit= dialog.findViewById<RelativeLayout>(R.id.rl_edit)
-        val tvTitle: TextView? = dialog.findViewById<TextView>(R.id.tv_title)
-        val ivImage: ImageView? = dialog.findViewById<ImageView>(R.id.iv_dialog)
-        val tvPrice: TextView? = dialog.findViewById<TextView>(R.id.tv_price)
-        val tvCategory: TextView? = dialog.findViewById<TextView>(R.id.tv_category)
-        val tvDescription: TextView? = dialog.findViewById<TextView>(R.id.tv_description)
-        val addButton: Button? = dialog.findViewById<Button>(R.id.add_button)
-        val favButton: ImageButton? = dialog.findViewById<ImageButton>(R.id.fav_button)
-        val rBar: RatingBar? = dialog.findViewById<RatingBar>(R.id.rBar)
-        val tvBar: TextView? = dialog.findViewById<TextView>(R.id.tv_rate)
-
-        if (rBar != null) {
-            rBar.rating = product.rating!!.rate
-        }
-        if (tvBar != null) {
-            tvBar.text = product.rating!!.rate.toString()
-        }
-        if (ivImage != null) {
-            Glide.with(ivImage)
-                .load(product.image)
-                .into(ivImage)
-        }
-
-        if (tvTitle != null) {
-            tvTitle.text = "Title: " + product.title.toString()
-        }
-
-        if (tvPrice != null) {
-            tvPrice.text = "Price: $"+product.price.toString()
-        }
-
-        if (tvCategory != null) {
-            tvCategory.text = "Category: "+product.category.toString()
-        }
-
-        if (tvDescription != null) {
-            tvDescription.text = "Description: "+product.description.toString()
-        }
-
-        if (product.isFav==true){
-            favButton?.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-        }else{
-            favButton?.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-        }
-
-        favButton?.setOnClickListener {
-            if (product.isFav==true){
-                product.isFav=false
-                deleteFavorite(product)
-                homeAdapter.notifyDataSetChanged()
-                favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-            }else{
-                product.isFav=true
-                addFavorite(product)
-                homeAdapter.notifyDataSetChanged()
-                favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-            }
-        }
-        addButton?.setOnClickListener {
-            addRoom(product)
-            Toast.makeText(requireContext(),"Added to cart",Toast.LENGTH_LONG).show()
-        }
-        btnEdit?.setOnClickListener {
-            Toast.makeText(requireContext(), "Clicked on Edit", Toast.LENGTH_SHORT).show()
-        }
-
-        dialog.show()
     }
 }

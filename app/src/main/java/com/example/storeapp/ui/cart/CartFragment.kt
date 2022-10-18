@@ -41,12 +41,12 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
+        setupRecycler()
         viewModel.getAllProductFromRoom()
         observe()
     }
 
-    private fun initRecycler() {
+    private fun setupRecycler() {
         binding.cartRecycler.apply {
             cartAdapter = CartAdapter(object : CartItemClickListener {
                 @SuppressLint("NotifyDataSetChanged")

@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.storeapp.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +26,13 @@
         android:name="com.example.storeapp.ui.cart.CartFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_cart" />
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.example.storeapp.ui.dialog.BottomSheetFragment"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <argument
+            android:name="productForDialog"
+            app:argType="com.example.storeapp.data.entity.Products" />
+    </dialog>
 </navigation>

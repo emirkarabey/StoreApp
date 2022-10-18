@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
         roomList.value?.let { isFav(it,dbRepository.getAllFavorites()) }
     }
 
-    fun addProduct(product: Products){//mapperla kullan
+    fun addCart(product: Products){//mapperla kullan
         viewModelScope.launch {
             val productEntity: ProductEntity = mapper.mapToEntity(product)
             dbRepository.addProduct(productEntity)
