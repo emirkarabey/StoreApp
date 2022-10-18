@@ -21,7 +21,7 @@ class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val viewModel : FavoriteViewModel by viewModels()
     private val binding get() = _binding!!
-    val mapper = ProductEntityMapper()
+    private val mapper = ProductEntityMapper()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

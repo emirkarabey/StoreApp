@@ -23,7 +23,7 @@ class CartFragment : Fragment() {
     private var _binding: FragmentCartBinding? = null
     private val viewModel: CartViewModel by viewModels()
     private val binding get() = _binding!!
-    val mapper = ProductEntityMapper()
+    private val mapper = ProductEntityMapper()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     var roomList: MutableLiveData<List<Products>> = MutableLiveData()
     var filteredProductList: MutableList<Products> = mutableListOf()
     val progressBar = MutableLiveData<Boolean>()
-    val mapper = ProductEntityMapper()
+    private val mapper = ProductEntityMapper()
 
     fun getData(
     ) = viewModelScope.launch(Dispatchers.IO){
@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-        productList.postValue(products)
+        productList.postValue(products)//galiba kullanılmıyor kontrol et
         progressBar.postValue(false)
     }
 
