@@ -95,9 +95,10 @@ class HomeFragment : BottomSheetDialogFragment() {
         binding.categoryRecycler.apply {
             categoryAdapter = HomeCategoryAdapter(categoryList,object : CategoryItemClickListener{
                 override fun onItemClick(category: String) {
+                    viewModel.getCategoryProduct(category)
                     viewModel.getData()
                     setupHomeRecycler()
-                    viewModel.getCategoryProduct(category)
+
                 }
 
             })

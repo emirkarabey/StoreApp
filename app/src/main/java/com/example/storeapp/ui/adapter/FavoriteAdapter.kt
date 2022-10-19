@@ -58,6 +58,9 @@ class FavoriteAdapter(private val listener: FavoriteItemClickListener) : Recycle
             binding.favButton.setOnClickListener {
                 listener.onItemClick(product[position])
             }
+            binding.addButton.setOnClickListener {
+                listener.onCartItemClick(product[position])
+            }
         }
     }
 

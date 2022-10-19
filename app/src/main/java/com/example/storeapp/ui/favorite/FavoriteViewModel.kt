@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.storeapp.data.entity.ProductEntity
+import com.example.storeapp.data.entity.Products
+import com.example.storeapp.domain.mapper.ProductEntityMapper
 import com.example.storeapp.repository.StoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,11 +18,18 @@ class FavoriteViewModel @Inject constructor(
 ): ViewModel() {
     val favList: MutableLiveData<List<ProductEntity>> = MutableLiveData()
     val progressBar = MutableLiveData<Boolean>()
+    private val mapper = ProductEntityMapper()
 
     fun getAllFavoriteFromRoom(){
         viewModelScope.launch(Dispatchers.IO) {
             progressBar.postValue(true)
             favList.postValue(dbRepository.getAllFavorites())
+        }
+    }
+    fun addCart(product: Products){
+        viewModelScope.launch {
+            val productEntity: ProductEntity = mapper.mapToEntity(product)
+            dbRepository.addProduct(productEntity)
         }
     }
 
