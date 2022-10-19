@@ -1,5 +1,6 @@
 package com.example.storeapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -39,11 +40,12 @@ class FavoriteAdapter(private val listener: FavoriteItemClickListener) : Recycle
         return FavoriteViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         with(holder) {
             with(product) {
                 binding.tvTitle.text = product[position].title
-                binding.tvPrice.text = product[position].price.toString()
+                binding.tvPrice.text = "$"+product[position].price.toString()
                 Glide.with(binding.ivFav)
                     .load(product[position].image)
                     .into(binding.ivFav)

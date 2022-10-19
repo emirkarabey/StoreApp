@@ -1,5 +1,6 @@
 package com.example.storeapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -36,11 +37,12 @@ class HomeAdapter(private val listener: ItemClickListener) :RecyclerView.Adapter
         return MyViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         with(holder){
             with(product){
                 binding.tvTitle.text = product[position].title
-                binding.tvPrice.text = product[position].price.toString()
+                binding.tvPrice.text = "$"+product[position].price.toString()
                 Glide.with(binding.ivHome)
                     .load(product[position].image)
                     .into(binding.ivHome)

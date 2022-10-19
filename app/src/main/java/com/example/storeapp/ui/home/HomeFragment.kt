@@ -39,6 +39,7 @@ class HomeFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        viewModel.getData()
         return binding.root
     }
 
@@ -48,19 +49,22 @@ class HomeFragment : BottomSheetDialogFragment() {
         setupCategoryRecycler()
         viewModel.getData()
         observe()
+        refresh()
+
+    }
+//on view create a çok giriyor sürekli internetten veri çekiyor bunu çöz
+
+    private fun refresh(){
         with(binding){
             swipeRefreshLayout.setOnRefreshListener {
                 progressBar.visibility = View.VISIBLE
                 homeRecycler.visibility = View.GONE
                 categoryRecycler.visibility = View.GONE
-                setupHomeRecycler()
                 viewModel.getData()
-                observe()
                 swipeRefreshLayout.isRefreshing = false
             }
         }
     }
-//on view create a çok giriyor sürekli internetten veri çekiyor bunu çöz
 
     private fun observe(){
         lifecycleScope.launchWhenCreated {
@@ -92,9 +96,8 @@ class HomeFragment : BottomSheetDialogFragment() {
             categoryAdapter = HomeCategoryAdapter(categoryList,object : CategoryItemClickListener{
                 override fun onItemClick(category: String) {
                     viewModel.getData()
-                    viewModel.getCategoryProduct(category)
                     setupHomeRecycler()
-                    observe()
+                    viewModel.getCategoryProduct(category)
                 }
 
             })
