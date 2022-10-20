@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -16,11 +17,10 @@ import com.example.storeapp.ui.adapter.CategoryItemClickListener
 import com.example.storeapp.ui.adapter.HomeAdapter
 import com.example.storeapp.ui.adapter.HomeCategoryAdapter
 import com.example.storeapp.ui.adapter.ItemClickListener
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BottomSheetDialogFragment() {
+class HomeFragment : Fragment() {
 
     lateinit var homeAdapter: HomeAdapter
     lateinit var categoryAdapter: HomeCategoryAdapter
@@ -30,14 +30,14 @@ class HomeFragment : BottomSheetDialogFragment() {
     private val viewModel : HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        categoryList = arrayListOf<String>()
+        categoryList = arrayListOf()
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel.getData()
         return binding.root

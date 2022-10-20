@@ -19,8 +19,8 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
     val categoryList: MutableLiveData<Categories> = MutableLiveData()
     val productList: MutableLiveData<List<Products>> = MutableLiveData()
-    var roomList: MutableLiveData<List<Products>> = MutableLiveData()
-    var filteredProductList: MutableList<Products> = mutableListOf()
+    private var roomList: MutableLiveData<List<Products>> = MutableLiveData()
+    private var filteredProductList: MutableList<Products> = mutableListOf()
     val progressBar = MutableLiveData<Boolean>()
     private val mapper = ProductEntityMapper()
 
@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-        productList.postValue(products)//galiba kullanılmıyor kontrol et
+        productList.postValue(products)
         progressBar.postValue(false)
     }
 

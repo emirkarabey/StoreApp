@@ -12,9 +12,7 @@ import com.example.storeapp.databinding.CartRecyclerItemBinding
 
 class CartAdapter(private val listener: CartItemClickListener) : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
 
-    class CartViewHolder(val binding: CartRecyclerItemBinding): RecyclerView.ViewHolder(binding.root){
-
-    }
+    class CartViewHolder(val binding: CartRecyclerItemBinding): RecyclerView.ViewHolder(binding.root)
 
     object CartDiffCallback: DiffUtil.ItemCallback<Products>(){
         override fun areItemsTheSame(oldItem: Products, newItem: Products): Boolean {
@@ -40,13 +38,11 @@ class CartAdapter(private val listener: CartItemClickListener) : RecyclerView.Ad
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         with(holder){
-            with(product){
-                binding.tvTitle.text = product[position].title
-                binding.tvPrice.text = "$"+product[position].price.toString()
-                Glide.with(binding.ivCart)
-                    .load(product[position].image)
-                    .into(binding.ivCart)
-            }
+            binding.tvTitle.text = product[position].title
+            binding.tvPrice.text = "$"+product[position].price.toString()
+            Glide.with(binding.ivCart)
+                .load(product[position].image)
+                .into(binding.ivCart)
 
             binding.deleteButton.setOnClickListener {
                 listener.onItemClick(product[position])

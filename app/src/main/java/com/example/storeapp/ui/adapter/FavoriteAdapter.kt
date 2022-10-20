@@ -14,9 +14,7 @@ import com.example.storeapp.databinding.FavRecyclerItemBinding
 class FavoriteAdapter(private val listener: FavoriteItemClickListener) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     class FavoriteViewHolder(val binding: FavRecyclerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-    }
+        RecyclerView.ViewHolder(binding.root)
 
     object FavDiffCallback : DiffUtil.ItemCallback<Products>() {
         override fun areItemsTheSame(oldItem: Products, newItem: Products): Boolean {
@@ -43,17 +41,15 @@ class FavoriteAdapter(private val listener: FavoriteItemClickListener) : Recycle
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         with(holder) {
-            with(product) {
-                binding.tvTitle.text = product[position].title
-                binding.tvPrice.text = "$"+product[position].price.toString()
-                Glide.with(binding.ivFav)
-                    .load(product[position].image)
-                    .into(binding.ivFav)
-                if(product[position].isFav==true){
-                    binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-                }else{
-                    binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-                }
+            binding.tvTitle.text = product[position].title
+            binding.tvPrice.text = "$"+product[position].price.toString()
+            Glide.with(binding.ivFav)
+                .load(product[position].image)
+                .into(binding.ivFav)
+            if(product[position].isFav==true){
+                binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+            }else{
+                binding.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
             }
             binding.favButton.setOnClickListener {
                 listener.onItemClick(product[position])
