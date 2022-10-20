@@ -76,16 +76,6 @@
                 app:iconGravity="textStart"
                 />
         </LinearLayout>
-        <ImageButton
-            android:id="@+id/fav_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_small_margin"
-            android:padding="@dimen/small_padding"
-            android:background="@drawable/ic_baseline_favorite_border_24"
-            android:layout_gravity="right"
-            android:contentDescription="@string/home_imageButton_contentDescription"
-            />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

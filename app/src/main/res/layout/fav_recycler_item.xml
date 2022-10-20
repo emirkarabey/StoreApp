@@ -12,13 +12,13 @@
         <ImageView
             android:id="@+id/iv_fav"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="@dimen/image_view_height"
             android:contentDescription="@string/cart_imageView_contentDescription"
             />
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/title_text_view_height"
             android:layout_margin="@dimen/small_margin"/>
         <TextView
             android:id="@+id/tv_price"
@@ -39,8 +39,8 @@
     </LinearLayout>
     <ImageButton
         android:id="@+id/fav_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/double_extra_small_margin"
         android:padding="@dimen/double_extra_small_padding"
         android:background="@drawable/ic_baseline_favorite_border_24"

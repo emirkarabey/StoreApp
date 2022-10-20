@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.example.storeapp.R
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentBottomSheetBinding
 import com.example.storeapp.ui.home.HomeViewModel
@@ -46,14 +45,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         viewModel.addCart(products)
     }
 
-    private fun addFavorite(products: Products){
-        viewModel.addFavorite(products)
-    }
-
-    private fun deleteFavorite(products: Products){
-        viewModel.deleteFavorite(products)
-    }
-
     @SuppressLint("SetTextI18n")
     fun showDialog(){
         val args = arguments
@@ -69,17 +60,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 tvPrice.text = "$"+product.price.toString()
                 tvRate.text = product.rating?.rate.toString()
                 rBar.rating = product.rating!!.rate
-                favButton.setOnClickListener {
-                    if (product.isFav==true){
-                        product.isFav=false
-                        deleteFavorite(product)
-                        favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-                    }else{
-                        product.isFav=true
-                        addFavorite(product)
-                        favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-                    }
-                }
                 addButton.setOnClickListener {
                     addCart(product)
                     Toast.makeText(requireContext(),"Added to cart", Toast.LENGTH_LONG).show()

@@ -12,13 +12,13 @@
         <ImageView
             android:id="@+id/iv_cart"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="@dimen/image_view_height"
             android:contentDescription="@string/cart_imageView_contentDescription"
             />
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/title_text_view_height"
             android:layout_margin="@dimen/small_margin"/>
         <TextView
             android:id="@+id/tv_price"

@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentHomeBinding
 import com.example.storeapp.ui.adapter.CategoryItemClickListener
@@ -79,12 +78,10 @@ class HomeFragment : BottomSheetDialogFragment() {
                 if (it){
                     binding.homeRecycler.visibility = View.GONE
                     binding.categoryRecycler.visibility = View.GONE
-                    binding.tvCategory.visibility = View.GONE
                     binding.progressBar.visibility = View.VISIBLE
                 }else{
                     binding.homeRecycler.visibility = View.VISIBLE
                     binding.categoryRecycler.visibility = View.VISIBLE
-                    binding.tvCategory.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
                 }
             }
