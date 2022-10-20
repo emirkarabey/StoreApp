@@ -34,9 +34,6 @@ class HomeCategoryAdapter(var categoryList:ArrayList<String>,private var listene
                 listener.onItemClick(categoryList[position])
             }
         }
-
-
-
     }
 
     override fun getItemCount(): Int {

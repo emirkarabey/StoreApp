@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="100dp"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/small_padding"
+    android:layout_marginVertical="@dimen/medium_padding"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/medium_padding"
+    tools:ignore="TouchTargetSizeCheck">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center"
-        android:padding="3dp"
-        android:layout_margin="3dp">
+        android:background="@color/purple_500">
 
         <TextView
-            android:id="@+id/tv_category"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:background="@color/design_default_color_primary"/>
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/small_padding"
+            android:layout_marginVertical="@dimen/medium_padding"
+            android:textColor="@color/white" />
     </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>
