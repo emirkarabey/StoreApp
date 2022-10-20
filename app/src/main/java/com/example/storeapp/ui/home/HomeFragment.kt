@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.data.entity.Products
 import com.example.storeapp.databinding.FragmentHomeBinding
 import com.example.storeapp.ui.adapter.CategoryItemClickListener
@@ -107,7 +108,6 @@ class HomeFragment : BottomSheetDialogFragment() {
                     categoryAdapter.setList(it)
                 }
             }
-            this.layoutManager = GridLayoutManager(context,4)
             adapter = categoryAdapter
         }
     }
