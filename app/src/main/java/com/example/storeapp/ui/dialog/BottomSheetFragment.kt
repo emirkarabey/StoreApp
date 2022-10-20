@@ -1,5 +1,6 @@
 package com.example.storeapp.ui.dialog
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +54,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         viewModel.deleteFavorite(products)
     }
 
+    @SuppressLint("SetTextI18n")
     fun showDialog(){
         val args = arguments
         val product: Products? = args?.getParcelable("productForDialog")
@@ -64,7 +66,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 tvTitle.text = product.title
                 tvCategory.text = product.category
                 tvDescription.text = product.description
-                tvPrice.text = product.price.toString()
+                tvPrice.text = "$"+product.price.toString()
                 tvRate.text = product.rating?.rate.toString()
                 rBar.rating = product.rating!!.rate
                 favButton.setOnClickListener {

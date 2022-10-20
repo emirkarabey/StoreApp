@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp">
+    android:layout_margin="@dimen/small_margin">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_margin="@dimen/small_margin">
         <ImageView
             android:id="@+id/iv_cart"
             android:layout_width="match_parent"
@@ -19,19 +19,19 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="10dp"/>
+            android:layout_margin="@dimen/small_margin"/>
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_margin="10dp"/>
+            android:layout_margin="@dimen/small_margin"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/delete_button"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:icon="@drawable/ic_baseline_remove_shopping_cart_24"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:text="@string/delete_button"
             />
     </LinearLayout>

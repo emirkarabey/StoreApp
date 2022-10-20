@@ -10,7 +10,7 @@
         android:id="@+id/rl_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="@dimen/small_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,28 +28,28 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+                android:layout_margin="@dimen/small_margin"/>
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:layout_margin="10dp"/>
+                android:layout_margin="@dimen/small_margin"/>
             <TextView
                 android:id="@+id/tv_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+                android:layout_margin="@dimen/small_margin"/>
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+                android:layout_margin="@dimen/small_margin"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="10dp">
+                android:layout_margin="@dimen/small_margin">
                 <RatingBar
                     android:id="@+id/rBar"
                     android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:icon="@drawable/ic_baseline_shopping_cart_24"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/purple_500"
                 android:text="@string/add_button"
@@ -78,10 +78,10 @@
         </LinearLayout>
         <ImageButton
             android:id="@+id/fav_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="6dp"
-            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_small_margin"
+            android:padding="@dimen/small_padding"
             android:background="@drawable/ic_baseline_favorite_border_24"
             android:layout_gravity="right"
             android:contentDescription="@string/home_imageButton_contentDescription"
